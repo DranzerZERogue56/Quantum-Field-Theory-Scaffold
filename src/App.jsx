@@ -559,6 +559,19 @@ const FullQuiz = ({ level }) => {
 
 // ─── MAIN APP ─────────────────────────────────────────────────────────────────
 
+const GLOBAL_STYLES = `
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #060a14; min-height: 100%; }
+  body { overflow-y: scroll; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0b1524; }
+  ::-webkit-scrollbar-thumb { background: #1a2d45; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2a4060; }
+  @supports not selector(::-webkit-scrollbar) {
+    * { scrollbar-width: thin; scrollbar-color: #1a2d45 #0b1524; }
+  }
+`;
+
 export default function App() {
   const [mode, setMode] = useState("home");
   const [level, setLevel] = useState("beginner");
@@ -576,6 +589,8 @@ export default function App() {
   const LEVELS = ["beginner", "intermediate", "advanced"];
 
   return (
+    <>
+    <style>{GLOBAL_STYLES}</style>
     <div style={{ minHeight: "100vh", background: "#060a14", color: "#e8f0fe", fontFamily: "sans-serif", WebkitFontSmoothing: "antialiased" }}>
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: 180, background: "radial-gradient(ellipse 100% 100% at 50% 0%,rgba(0,212,255,0.04),transparent)", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "relative", zIndex: 1, maxWidth: 600, margin: "0 auto", padding: "18px 14px 60px" }}>
@@ -696,5 +711,6 @@ export default function App() {
         {mode === "quiz" && <FullQuiz key={quizKey} level={level} />}
       </div>
     </div>
+    </>
   );
 }
