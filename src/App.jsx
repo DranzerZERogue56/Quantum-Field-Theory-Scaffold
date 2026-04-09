@@ -1,7 +1,5 @@
 import { useState, useRef, useCallback } from "react";
 
-import { useState, useRef, useCallback } from "react";
-
 const MODULES = [
   {
     id: 1, title: "What IS a Field?", icon: "〜", color: "#00d4ff",
