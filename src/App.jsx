@@ -579,6 +579,7 @@ export default function App() {
   const [ci, setCi] = useState(0);
   const [sqzLevel, setSqzLevel] = useState(null);
   const [quizKey, setQuizKey] = useState(0);
+  const [showQR, setShowQR] = useState(false);
 
   const mod = MODULES[ami];
   const cards = mod.content[level] || [];
@@ -599,7 +600,25 @@ export default function App() {
         <div style={{ textAlign: "center", marginBottom: 20 }}>
           <div style={{ fontSize: "clamp(22px,5vw,34px)", fontWeight: 800, background: "linear-gradient(135deg,#00d4ff,#b44fff,#ff6b35)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: 3 }}>Quantum Field Theory</div>
           <div style={{ fontSize: 10, color: "#4a6080", fontFamily: "monospace", letterSpacing: "0.12em" }}>INTERACTIVE EXPLORER</div>
+          <button onClick={() => setShowQR(true)} style={{ marginTop: 10, padding: "6px 14px", borderRadius: 40, background: "#0b1524", border: "1.5px solid #1a2d45", color: "#6b8cae", fontFamily: "monospace", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.06em", transition: "all 0.2s", WebkitTapHighlightColor: "transparent" }}>
+            QR Code
+          </button>
         </div>
+
+        {/* QR CODE MODAL */}
+        {showQR && (
+          <div onClick={() => setShowQR(false)} style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.82)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+            <div onClick={e => e.stopPropagation()} style={{ background: "#0b1524", border: "1.5px solid #1a2d45", borderRadius: 18, padding: "28px 24px", textAlign: "center", cursor: "default", maxWidth: 320 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#e8f0fe", marginBottom: 4 }}>Open on your phone</div>
+              <div style={{ fontSize: 10, color: "#4a6080", fontFamily: "monospace", marginBottom: 16 }}>Scan this QR code with your camera</div>
+              <div style={{ background: "#ffffff", borderRadius: 12, padding: 16, display: "inline-block", marginBottom: 16 }}>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdranzerzerogue56.github.io%2FQuantum-Field-Theory-Scaffold%2F" alt="QR Code" width={200} height={200} style={{ display: "block" }} />
+              </div>
+              <div style={{ fontSize: 10, color: "#3a5060", fontFamily: "monospace", wordBreak: "break-all", marginBottom: 16 }}>dranzerzerogue56.github.io/Quantum-Field-Theory-Scaffold</div>
+              <button onClick={() => setShowQR(false)} style={{ padding: "8px 20px", borderRadius: 40, background: "transparent", border: "1.5px solid #1a2d45", color: "#6b8cae", fontFamily: "monospace", fontSize: 10, fontWeight: 700, cursor: "pointer", WebkitTapHighlightColor: "transparent" }}>Close</button>
+            </div>
+          </div>
+        )}
 
         {/* LEVEL SELECTOR */}
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>
